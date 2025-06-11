@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Compass | Smart Career Recommendations</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <div class="container">
+    <div class="logo-wrapper">
+        <header class="header">
+            <div class="logo" onclick="showHomePage()">
+                <div class="logo-icon">PH</div>
+                <div class="logo-text">PathWise</div>
+            </div>
+        </header>
+
+        <!-- Home Page Section -->
+        
+        <section id="home-page" class="page-section active">
+            <section class="cta">
+                <h2 class="cta-title">Start Your Career Journey Today</h2>
+                <p class="cta-subtitle">Join thousands of professionals who have found their perfect career match with Career Compass.</p>
+                <button class="btn btn-primary" onclick="showUploadPage()">
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    Upload Your Resume
+                </button>
+            </section>
+        </section>
+
+        <!-- Upload Page Section -->
+        <section id="upload-page" class="page-section">
+
+            <div class="card fade-in" id="upload-section">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-title-icon">1</div>
+                        Upload Your Resume
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="upload-area" id="upload-area">
+                        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <h3 class="upload-title">Drag & Drop Your Resume</h3>
+                        <p class="upload-subtitle">or click to browse files</p>
+                        <span class="upload-formats">PDF, DOCX, TXT</span>
+                        <input type="file" id="file-upload" accept=".pdf,.docx,.doc,.txt">
+                    </div>
+
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" id="progress-bar"></div>
+                        </div>
+                        <div class="progress-status">
+                            <span id="progress-status">Processing resume...</span>
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in" id="profile-section" style="display: none;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-title-icon">2</div>
+                        Complete Your Profile
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <p class="subtitle">We've extracted information from your resume. Please review and complete any missing information.</p>
+                    <div class="tabs">
+                        <div class="tab active" data-tab="personal">Personal Info</div>
+                        <div class="tab" data-tab="skills">Skills & Expertise</div>
+                        <div class="tab" data-tab="experience">Experience</div>
+                        <div class="tab" data-tab="education">Education</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="personal-tab">
+                        <div class="form-section">
+                            <div class="form-section-title">
+                                <div class="form-section-icon">P</div>
+                                Personal Information
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label class="form-label" for="full-name">Full Name</label>
+                                    <input type="text" id="full-name" class="form-input" placeholder="Your full name">
+                                    <div class="error-message" id="full-name-error">Full name is required</div>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label" for="email">Email Address</label>
+                                    <input type="email" id="email" class="form-input" placeholder="Your email address">
+                                    <div class="error-message" id="email-error">Email address is required</div>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label" for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" class="form-input" placeholder="Your phone number">
+                                    <div class="error-message" id="phone-error">Phone number is required</div>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label" for="location">Location</label>
+                                    <input type="text" id="location" class="form-input" placeholder="City, Country">
+                                    <div class="error-message" id="location-error">Location is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="skills-tab">
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <div class="form-section-icon">S</div>
+                            Skills (Technical & Soft)
+                        </div>
+                        <div class="skills-container" id="skills-container"></div>
+                        <div class="skill-input-container">
+                            <input type="text" id="new-skill" class="form-input" placeholder="Add a skill (e.g., Python, Communication)">
+                            <button class="btn btn-primary" id="add-skill-btn">Add</button>
+                        </div>
+                        <div class="error-message" id="skills-error">At least one skill is required</div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <div class="form-section-icon">L</div>
+                            Languages
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label" for="languages">Languages</label>
+                            <input type="text" id="languages" class="form-input" placeholder="Languages you speak (e.g., English, Spanish)">
+                            <div class="error-message" id="languages-error">Languages are required</div>
+                        </div>
+                    </div>
+                </div>
+
+                    
+                    <div class="tab-content" id="experience-tab">
+                    <div class="form-section">
+                        <div class="form-section-title">
+                        <div class="form-section-icon">E</div>
+                        Work Experience
+                        </div>
+                        <div class="form-field">
+                        <label class="form-label" for="work-experience">Work Experience</label>
+                        <textarea id="work-experience" class="form-input form-textarea" placeholder="Summarize your work experience"></textarea>
+                        <div class="error-message" id="work-experience-error">Work experience is required</div>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label" for="job-level">
+                                Predicted Job Level
+                                <span id="job-level-accuracy" style="font-size: 0.8rem; color: gray;"></span>
+                            </label>
+                            <div class="form-input" style="background-color: #f0f0f0;">
+                                <span id="job-level">Loading...</span>
+                            </div>
+                            <input type="hidden" id="predicted-level" name="job_level" />
+                        </div>
+
+                        <input type="hidden" id="predicted-level" />
+                    </div>
+                    </div>
+                    
+                    <div class="tab-content" id="education-tab">
+                        <div class="form-section">
+                            <div class="form-section-title">
+                                <div class="form-section-icon">E</div>
+                                Education 
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label" for="education">Education</label>
+                                <textarea id="education" class="form-input form-textarea" placeholder="List your educational background, including degrees, institutions, and graduation years"></textarea>
+                                <div class="error-message" id="education-error">Education information is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" id="back-to-upload-btn">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                            Back
+                        </button>
+                         <button class="btn btn-primary" id="get-recommendations-btn" style="float: right;">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                            Get Career Recommendations
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div class="loading-text">Analyzing your profile with AI</div>
+                <div class="loading-subtext">Using NLP, TF-IDF, and BERT to find your perfect match</div>
+            </div>
+
+            <div class="card fade-in" id="results" style="display: none;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-title-icon">3</div>
+                        Recommended Career Paths
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="job-listings"></div>
+                    <div class="pagination-wrapper" style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; flex-wrap: wrap;">
+                        <button class="btn pagination-btn" id="back-to-profile-btn">← Back to Profile</button>
+                        
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn pagination-btn" id="prev-page-btn">Previous</button>
+                            <div id="pagination-numbers" style="display: flex; gap: 0.3rem;"></div>
+                            <button class="btn pagination-btn" id="next-page-btn">Next</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div id="job-detail-view" class="card fade-in" style="display: none; margin-top: 2rem;">
+            <div class="card-header">
+                <div class="card-title">
+                <span id="detail-title">Job Title</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>Company:</strong> <span id="detail-company"></span></p>
+                <p><strong>Location:</strong> <span id="detail-location"></span></p>
+                <p><strong>Match:</strong> <span id="detail-match"></span>%</p>
+                <hr style="margin: 1rem 0;">
+                <p><strong>Description:</strong></p>
+                <p id="detail-description"></p>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 2rem; gap: 1rem;">
+                <a id="google-search-link" href="#" target="_blank" style="text-decoration: none;">
+                    <button class="btn pagination-btn">Search on Google</button>
+                </a>
+                <button class="btn pagination-btn" id="back-to-list-btn">← Back to Job List</button>
+                </div>
+
+            </div>
+            </div>
+
+        </section>
+    </div>
+<script>
+const uploadArea = document.getElementById('upload-area');
+const fileUpload = document.getElementById('file-upload');
+const profileSection = document.getElementById('profile-section');
+const uploadSection = document.getElementById('upload-section');
+const loadingIndicator = document.getElementById('loading');
+const resultsSection = document.getElementById('results');
+const skillsContainer = document.getElementById('skills-container');
+const jobListings = document.getElementById('job-listings');
+
+function addSkillTag(skill) {
+    if (!skill) return;
+    const existing = Array.from(skillsContainer.querySelectorAll('.skill-tag')).map(t => t.textContent.replace('×', '').trim());
+    if (existing.includes(skill)) return;
+    const tag = document.createElement('div');
+    tag.className = 'skill-tag';
+    tag.innerHTML = `${skill} <span class="skill-remove">×</span>`;
+    tag.querySelector('.skill-remove').addEventListener('click', () => tag.remove());
+    skillsContainer.appendChild(tag);
+}
+
+document.getElementById('add-skill-btn').addEventListener('click', () => {
+    const input = document.getElementById('new-skill');
+    const value = input.value.trim();
+    if (value) {
+        addSkillTag(value);
+        input.value = '';
+    }
+});
+
+function prefillFormWithExtractedData(file) {
+    const formData = new FormData();
+    formData.append('resume', file);
+
+    fetch('/extract', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('full-name').value = data.name || '';
+        document.getElementById('email').value = data.email || '';
+        document.getElementById('phone').value = data.phone || '';
+        document.getElementById('location').value = data.location || '';
+        document.getElementById('languages').value = data.languages || '';
+        document.getElementById('work-experience').value = data.workExperience || '';
+        document.getElementById('education').value = data.education || '';
+        document.getElementById('predicted-level').value = data.job_level || 'Entry';
+
+        // ✅ This is what was missing
+        document.getElementById('job-level').textContent = data.job_level || 'Entry';
+        document.getElementById('job-level-accuracy').textContent =
+            `(${data.job_level_confidence}% confidence based on ${data.experience_years} years)`;
+
+        (data.skills || []).forEach(addSkillTag);
+        (data.softSkills || '').split(',').forEach(s => addSkillTag(s.trim()));
+
+        uploadSection.style.display = 'none';
+        profileSection.style.display = 'block';
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Failed to extract resume.");
+    });
+
+}
+
+function getRecommendations() {
+    const skills = Array.from(skillsContainer.querySelectorAll('.skill-tag'))
+        .map(t => t.textContent.replace('×', '').trim()).join(' ');
+    const education = document.getElementById('education').value || '';
+    const job_level = document.getElementById('job-level').value || '';
+    const softSkills = ''; // Optional
+
+    profileSection.style.display = 'none';
+    loadingIndicator.style.display = 'block';
+
+    fetch('/recommend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ skills, softSkills, education, job_level })
+    })
+    .then(res => res.json())
+    .then(data => {
+        loadingIndicator.style.display = 'none';
+
+        if (data.error) {
+            alert("Recommendation failed: " + data.error);
+            profileSection.style.display = 'block';
+            return;
+        }
+
+        if (Array.isArray(data)) {
+            resultsSection.style.display = 'block';
+            displayJobRecommendations(data);
+        } else {
+            alert("Unexpected response from server.");
+            profileSection.style.display = 'block';
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Request failed: " + err.message);
+        profileSection.style.display = 'block';
+    });
+
+}
+
+let currentPage = 1;
+const jobsPerPage = 12;
+
+function displayJobRecommendations(jobs) {
+    jobListings.innerHTML = '';
+
+    const uniqueJobs = Array.from(new Set(jobs.map(JSON.stringify))).map(JSON.parse);
+    window.recommendedJobs = uniqueJobs;
+
+    const start = (currentPage - 1) * jobsPerPage;
+    const end = start + jobsPerPage;
+    const paginatedJobs = uniqueJobs.slice(start, end);
+
+    paginatedJobs.forEach((job, index) => {
+        const div = document.createElement('div');
+        div.className = 'job-card-grid';
+        div.innerHTML = `
+            <div class="job-title">${job.job_title}</div>
+            <div class="job-company">${job.company}</div>
+            <div class="btn-row">
+                <span class="job-match-badge">${job.match_percent}% Match</span>
+                <button class="btn btn-secondary view-details-btn">View Details</button>
+            </div>
+        `;
+        div.querySelector('.view-details-btn').addEventListener('click', () => showJobDetail(start + index));
+
+
+        jobListings.appendChild(div);
+    });
+
+    createPaginationControls(uniqueJobs.length);
+}
+
+function createPaginationControls(totalJobs) {
+    const totalPages = Math.ceil(totalJobs / jobsPerPage);
+    const paginationNumbers = document.getElementById("pagination-numbers");
+    paginationNumbers.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement("button");
+        pageBtn.className = "btn pagination-btn";
+        pageBtn.textContent = i;
+
+        if (i === currentPage) {
+            pageBtn.style.fontWeight = "bold";
+            pageBtn.style.backgroundColor = "#2c3e50";
+            pageBtn.style.color = "#fff";
+        }
+
+        pageBtn.addEventListener("click", () => {
+            currentPage = i;
+            displayJobRecommendations(window.recommendedJobs);
+        });
+
+        paginationNumbers.appendChild(pageBtn);
+    }
+
+    document.getElementById("prev-page-btn").disabled = (currentPage === 1);
+    document.getElementById("next-page-btn").disabled = (currentPage === totalPages);
+}
+
+
+
+document.getElementById('back-to-profile-btn').onclick = () => {
+    resultsSection.style.display = 'none';
+    profileSection.style.display = 'block';
+};
+
+document.getElementById('prev-page-btn').onclick = () => {
+    if (currentPage > 1) {
+        currentPage--;
+        displayJobRecommendations(window.recommendedJobs);
+    }
+};
+
+document.getElementById('next-page-btn').onclick = () => {
+    const totalPages = Math.ceil(window.recommendedJobs.length / jobsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayJobRecommendations(window.recommendedJobs);
+    }
+};
+
+
+function showJobDetail(index) {
+    const job = window.recommendedJobs[index];
+
+    document.getElementById('detail-title').textContent = job.job_title;
+    document.getElementById('detail-company').textContent = job.company;
+    document.getElementById('detail-location').textContent = job.location;
+    document.getElementById('detail-match').textContent = job.match_percent;
+    document.getElementById('detail-description').textContent = job.description;
+
+    // Create general Google search URL (Job title, company, location)
+    const query = `${job.job_title} at ${job.company} ${job.location}`;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    document.getElementById('google-search-link').href = googleSearchUrl;
+
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('job-detail-view').style.display = 'block';
+}
+
+
+document.getElementById('back-to-list-btn').onclick = () => {
+    document.getElementById('job-detail-view').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+};
+
+
+uploadArea.addEventListener('click', () => fileUpload.click());
+
+fileUpload.addEventListener('change', e => {
+    if (e.target.files.length) {
+        prefillFormWithExtractedData(e.target.files[0]);
+    }
+});
+
+document.getElementById('get-recommendations-btn').addEventListener('click', () => {
+    getRecommendations();
+});
+
+function showUploadPage() {
+    document.getElementById("home-page").classList.remove("active");
+    document.getElementById("upload-page").classList.add("active");
+}
+
+function showHomePage() {
+    document.getElementById("upload-page").classList.remove("active");
+    document.getElementById("home-page").classList.add("active");
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        tab.classList.add("active");
+        const tabId = tab.getAttribute("data-tab");
+        document.getElementById(tabId + "-tab").classList.add("active");
+    });
+});
+
+document.getElementById('back-to-upload-btn').addEventListener('click', () => {
+    profileSection.style.display = 'none';
+    uploadSection.style.display = 'block';
+});
+document.getElementById('job-level').textContent = 'Unable to predict';
+
+document.getElementById('predicted-level').value = data.job_level || 'Entry';
+
+document.getElementById('job-level-accuracy').textContent =
+  `(${data.job_level_confidence}% confidence based on ${data.experience_years} years)`;
+
+</script>
+
+
+</body>
+</html>
